@@ -6,7 +6,7 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
 const AppRouter = () => {
-  const auth = true; //TODO:crear estado para verificar autenticacion
+  const auth = false; //TODO:crear estado para verificar autenticacion
   return (
     <Router>
       <div>
