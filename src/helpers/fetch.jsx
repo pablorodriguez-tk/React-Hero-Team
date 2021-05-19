@@ -2,9 +2,9 @@ import axios from 'axios';
 import { Alert } from '../components/Alert/Alert';
 
 const baseUrlLogin = process.env.REACT_APP_LOGIN_API;
-// const baseUrlHeroApi = `${process.env.REACT_APP_HERO_API_URL}/${process.env.REACT_APP_ACCESS_TOKEN}`;
+const baseUrlHeroApi = `${process.env.REACT_APP_HERO_API_URL}/${process.env.REACT_APP_ACCESS_TOKEN}`;
 
-export const getToken = async (email, password) => {
+export const loginWithEmailAndPassword = async (email, password) => {
   try {
     const body = { email, password };
     const { data } = await axios.post(baseUrlLogin, body);
@@ -12,5 +12,14 @@ export const getToken = async (email, password) => {
     return token;
   } catch (error) {
     Alert('Error', 'Invalid email or password', 'error');
+  }
+};
+
+export const searchHero = async (heroName) => {
+  try {
+    const { data } = await axios.get(`${baseUrlHeroApi}/search/${heroName}`);
+    return data.results;
+  } catch (error) {
+    console.log(error);
   }
 };

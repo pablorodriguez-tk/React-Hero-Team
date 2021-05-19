@@ -8,6 +8,11 @@ import * as Yup from 'yup';
 export const LoginScreen = () => {
   const dispatch = useDispatch();
 
+  const handleSubmit = (values, { setSubmitting }) => {
+    setSubmitting(false);
+    dispatch(startLogin(values));
+  };
+
   return (
     <Formik
       //TODO: In production, this initial form must be a empty string
@@ -18,12 +23,7 @@ export const LoginScreen = () => {
           .min(5, 'Password must be at least 5 characters')
           .required('Required'),
       })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          setSubmitting(false);
-          dispatch(startLogin(values));
-        }, 400);
-      }}
+      onSubmit={handleSubmit}
     >
       {(formik) => (
         <div className="container login-container animate__animated animate__fadeIn animate__faster ">

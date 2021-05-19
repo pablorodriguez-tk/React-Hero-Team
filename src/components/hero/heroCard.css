@@ -1,0 +1,53 @@
+.my-card {
+  min-width: 260px;
+  max-width: 300px;
+  max-height: 70vh;
+  border-radius: 5px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  margin: 10px 5px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.my-card img {
+  transition: all 0.15s linear;
+  position: relative;
+  top: -15%;
+  left: -25%;
+  filter: brightness(70%);
+}
+
+.my-card .profile-name {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #fff;
+  padding: 15px 20px;
+  transition: all 0.15s linear;
+}
+
+.my-card .add {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.596);
+  left: 70px;
+  bottom: 20px;
+  transition: all 0.15s linear;
+  font-size: 1rem;
+}
+
+.my-card:hover .add {
+  transform: scale(1.2);
+}
+
+.my-card:hover .profile-name {
+  transform: scale(1.1);
+  padding: 15px;
+}
+
+.my-card img:hover {
+  transform: scale(1.01);
+}

@@ -1,9 +1,9 @@
-import { getToken } from '../helpers/fetch';
+import { loginWithEmailAndPassword } from '../helpers/fetch';
 import { types } from '../types/types';
 
 export const startLogin = ({ email, password }) => {
   return async (dispatch) => {
-    const token = await getToken(email, password);
+    const token = await loginWithEmailAndPassword(email, password);
     if (token) {
       localStorage.setItem('token', token);
       dispatch(login(email));
