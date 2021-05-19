@@ -30,3 +30,14 @@
   color: #fff;
   background-color: #014491;
 }
+
+.login-form .btnSubmit:disabled {
+  color: #fff;
+  background-color: grey;
+}
+
+.error {
+  position: absolute;
+  color: red;
+  font-size: 0.7rem;
+}
