@@ -1,26 +1,23 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { startLogin } from '../../actions/auth';
 import useForm from '../../hooks/useForm';
 import './login.css';
 
 export const LoginScreen = () => {
+  const dispatch = useDispatch();
   const initialForm = {
     //TODO: In production, this initial form must be a empty string
-    email: 'challange@alkemy.org',
+    email: 'challenge@alkemy.org',
     password: 'react',
   };
 
   const [formValues, handleInputChange] = useForm(initialForm);
-
   const { email, password } = formValues;
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (email === 'challange@alkemy.org' && password === 'react') {
-      console.log('Login');
-      //TODO: dispatch login
-    } else {
-      console.log('Invalid email or password');
-    }
+    dispatch(startLogin(email, password));
   };
 
   return (
@@ -50,12 +47,7 @@ export const LoginScreen = () => {
             />
           </div>
           <div className="input-group mb-3">
-            <input
-              className="btnSubmit"
-              type="submit"
-              value="Login"
-              // TODO:disabled={loading}
-            />
+            <input className="btnSubmit" type="submit" value="Login" />
           </div>
         </form>
       </div>

@@ -1,9 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
+import { startLogout } from '../../actions/auth';
 
 export const Navbar = () => {
+  const dispatch = useDispatch();
+
   const handleLogout = () => {
-    console.log('Logout');
+    dispatch(startLogout());
   };
 
   return (

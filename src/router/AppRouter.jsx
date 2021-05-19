@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { LoginScreen } from '../components/auth/LoginScreen';
 import DashboardRoutes from './DashboardRoutes';
@@ -6,7 +7,8 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
 const AppRouter = () => {
-  const auth = false; //TODO:crear estado para verificar autenticacion
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
   return (
     <Router>
       <div>
@@ -15,12 +17,12 @@ const AppRouter = () => {
             exact
             path="/login"
             component={LoginScreen}
-            isAuthenticated={auth} //TODO:crear estado para verificar autenticacion
+            isAuthenticated={isLoggedIn}
           />
           <PrivateRoute
             path="/"
             component={DashboardRoutes}
-            isAuthenticated={auth} //TODO:crear estado para verificar autenticacion
+            isAuthenticated={isLoggedIn}
           />
         </Switch>
       </div>
