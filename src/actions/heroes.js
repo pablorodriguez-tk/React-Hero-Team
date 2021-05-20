@@ -6,7 +6,6 @@ export const startSearch = (query) => {
     const data = await searchHero(query);
     const heroes = data;
     if (heroes) {
-      localStorage.setItem('heroes', JSON.stringify(heroes));
       dispatch(search(heroes));
     }
   };
@@ -15,4 +14,13 @@ export const startSearch = (query) => {
 const search = (heroSearch) => ({
   type: types.heroSearch,
   payload: heroSearch,
+});
+
+export const HeroAdd = (id, alignment) => ({
+  type: types.heroAdd,
+  payload: { id, alignment },
+});
+
+export const HeroLogout = () => ({
+  type: types.HeroLogout,
 });

@@ -45,11 +45,11 @@ export const SearchScreen = () => {
           </div>
         )}
       </Formik>
-      <h1>
+      <div className="container">
         {heroSearch.map((hero) => (
           <HeroCard key={hero.id} {...hero} />
         ))}
-      </h1>
+      </div>
     </>
   );
 };

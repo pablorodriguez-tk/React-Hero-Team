@@ -20,7 +20,7 @@ const login = (email) => ({
 
 export const startLogout = () => {
   return (dispatch) => {
-    localStorage.clear();
+    localStorage.clear('token');
     dispatch(logout());
   };
 };
