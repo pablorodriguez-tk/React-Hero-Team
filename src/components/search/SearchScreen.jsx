@@ -47,7 +47,7 @@ export const SearchScreen = () => {
       </Formik>
       <div className="container">
         {heroSearch.map((hero) => (
-          <HeroCard key={hero.id} {...hero} />
+          <HeroCard cta={'Click to add to team'} key={hero.id} {...hero} />
         ))}
       </div>
     </>

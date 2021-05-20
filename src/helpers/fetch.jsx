@@ -23,3 +23,15 @@ export const searchHero = async (heroName) => {
     console.log(error);
   }
 };
+
+// name, imagen,powerstats,
+// ver detalle, eliminar
+export const getHeroById = async (id) => {
+  try {
+    const { data } = await axios.get(`${baseUrlHeroApi}/${id}`);
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

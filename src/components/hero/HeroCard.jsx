@@ -9,13 +9,24 @@ import {
 import { HeroAdd } from '../../actions/heroes';
 import { Alert } from '../Alert/Alert';
 
-export const HeroCard = ({ id, name, image, biography }) => {
+export const HeroCard = ({
+  hasPowerstats,
+  cta,
+  id,
+  name,
+  powerstats,
+  biography,
+  appearance,
+  work,
+  connections,
+  image,
+}) => {
   const dispatch = useDispatch();
   const { badHero, goodHero, neutralHero } = useSelector(
     (state) => state.validation
   );
 
-  const handleAddHero = (id, biography) => {
+  const handleAddHero = ({ id, biography }) => {
     const totalHeroes = badHero + goodHero + neutralHero;
     console.log(totalHeroes);
     const orientation = biography.alignment;
@@ -26,7 +37,18 @@ export const HeroCard = ({ id, name, image, biography }) => {
       if (orientation === 'bad') {
         // 3 Bad Heroes max
         if (badHero <= 2) {
-          dispatch(HeroAdd(id, biography.alignment));
+          dispatch(
+            HeroAdd({
+              id,
+              name,
+              powerstats,
+              biography,
+              appearance,
+              work,
+              connections,
+              image,
+            })
+          );
           dispatch(AddedBadHero());
         } else {
           Alert(
@@ -41,7 +63,18 @@ export const HeroCard = ({ id, name, image, biography }) => {
         console.log(goodHero);
         // 3 Good Heroes max
         if (goodHero <= 2) {
-          dispatch(HeroAdd(id, biography.alignment));
+          dispatch(
+            HeroAdd({
+              id,
+              name,
+              powerstats,
+              biography,
+              appearance,
+              work,
+              connections,
+              image,
+            })
+          );
           dispatch(AddedGoodHero());
         } else {
           Alert(
@@ -53,7 +86,18 @@ export const HeroCard = ({ id, name, image, biography }) => {
       }
 
       if (orientation === 'neutral') {
-        dispatch(HeroAdd(id, biography.alignment));
+        dispatch(
+          HeroAdd({
+            id,
+            name,
+            powerstats,
+            biography,
+            appearance,
+            work,
+            connections,
+            image,
+          })
+        );
         dispatch(AddedNeutralHero());
       }
     } else {
@@ -66,10 +110,40 @@ export const HeroCard = ({ id, name, image, biography }) => {
   };
 
   return (
-    <div className="my-card" onClick={() => handleAddHero(id, biography)}>
+    <div
+      className="my-card"
+      onClick={() =>
+        handleAddHero({
+          id,
+          name,
+          powerstats,
+          biography,
+          appearance,
+          work,
+          connections,
+          image,
+        })
+      }
+    >
       <img src={image.url} alt={name} />
       <div className="profile-name">{name}</div>
-      <div className="add">Click to add to team</div>
+      {hasPowerstats && (
+        <div className="profile-overview">
+          <div className="row">
+            <div className="col-ms-4">
+              <h3>Powerstats</h3>
+              <p>combat: {powerstats.combat}</p>
+              <p>durability: {powerstats.durability}</p>
+              <p>intelligence: {powerstats.intelligence}</p>
+              <p>power: {powerstats.power}</p>
+              <p>speed: {powerstats.speed}</p>
+              <p>strength: {powerstats.strength}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {cta && <div className="add">{cta}</div>}
     </div>
   );
 };
