@@ -15,7 +15,7 @@ export const HeroDetailScreen = (props) => {
 
   const history = useHistory();
   const handleGoBack = () => {
-    history.goBack();
+    history.push('/');
   };
 
   return (

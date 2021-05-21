@@ -42,9 +42,7 @@ export const HeroCard = ({
 
   const handleAddHero = ({ id, biography }) => {
     const totalHeroes = badHero + goodHero + neutralHero;
-    console.log(totalHeroes);
     const orientation = biography.alignment;
-    console.log(orientation);
 
     // 6 Heroes max
     if (totalHeroes <= 5) {
@@ -64,7 +62,6 @@ export const HeroCard = ({
       }
 
       if (orientation === 'good') {
-        console.log(goodHero);
         // 3 Good Heroes max
         if (goodHero <= 2) {
           dispatch(HeroAdd(sendToHeroAdd));
@@ -116,6 +113,7 @@ export const HeroCard = ({
       >
         <img src={image.url} alt={name} />
         <div className="profile-name">{name}</div>
+        <div className="profile-orientation">{biography.alignment}</div>
         {hasPowerstats && (
           <div className="profile-overview">
             <div className="row">

@@ -1,27 +1,32 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { startGetHeroesById } from '../../actions/heroes';
-
+import { heroFetch, startGetHeroesById } from '../../actions/heroes';
 import { HeroCard } from './HeroCard';
 
 export const HeroList = () => {
   const dispatch = useDispatch();
-
-  const { heroIds, heroTeam } = useSelector((state) => state.heroes);
+  const [state, setState] = useState([]);
+  const { heroIds, heroTeam, HeroFetch } = useSelector((state) => state.heroes);
 
   useEffect(() => {
     const get = () => {
       heroIds.map(async (id) => {
-        await dispatch(startGetHeroesById(id));
+        const data = await dispatch(startGetHeroesById(id));
+        let prevState = state;
+        let newArray = prevState.push(data);
+        setState(newArray);
+        dispatch(heroFetch(state));
       });
     };
-    get();
-  }, [dispatch, heroIds]);
 
+    //dispatch todos los datos en store
+
+    get();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className="card-columns animate__animated animate__fadeIn">
-      {heroTeam.map((props) => (
+      {HeroFetch.map((props) => (
         <HeroCard
           key={props.id}
           hasPowerstats={true}

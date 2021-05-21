@@ -48,8 +48,8 @@ export const startGetHeroesById = (id) => {
   return async (dispatch) => {
     try {
       const data = await getHeroById(id);
-      console.log(data);
       dispatch(getHeroesById(data));
+      return data;
     } catch (error) {
       console.log(error);
     }
@@ -64,4 +64,9 @@ export const getHeroesById = (data) => ({
 export const HeroId = (id) => ({
   type: types.HeroId,
   payload: id,
+});
+
+export const heroFetch = (data) => ({
+  type: types.HeroFetch,
+  payload: data,
 });

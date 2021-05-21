@@ -7,6 +7,7 @@ export const types = {
   HeroLogout: '[hero] Logout',
   HeroGetById: '[hero] Get by ID',
   HeroId: '[Hero] Id hero saved',
+  HeroFetch: '[Hero] hero Fetch',
 
   validationBadHero: '[validation] add bad hero',
   validationGoodHero: '[validation] Add good hero',
