@@ -6,6 +6,7 @@ export const types = {
   heroAdd: '[Hero] Add to team',
   HeroLogout: '[hero] Logout',
   HeroGetById: '[hero] Get by ID',
+  HeroId: '[Hero] Id hero saved',
 
   validationBadHero: '[validation] add bad hero',
   validationGoodHero: '[validation] Add good hero',

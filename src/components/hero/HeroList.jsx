@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { startGetHeroesById } from '../../actions/heroes';
+
 import { HeroCard } from './HeroCard';
 
 export const HeroList = () => {
-  const { heroTeamIds } = useSelector((state) => state.heroes);
+  const dispatch = useDispatch();
+
+  const { heroIds, heroTeam } = useSelector((state) => state.heroes);
+
+  useEffect(() => {
+    const get = () => {
+      heroIds.map(async (id) => {
+        await dispatch(startGetHeroesById(id));
+      });
+    };
+    get();
+  }, [dispatch, heroIds]);
 
   return (
     <div className="card-columns animate__animated animate__fadeIn">
-      {heroTeamIds.map((props) => (
+      {heroTeam.map((props) => (
         <HeroCard
           key={props.id}
-          hasPowerstats="true"
+          hasPowerstats={true}
           cta={'Click to see more'}
           {...props}
         />

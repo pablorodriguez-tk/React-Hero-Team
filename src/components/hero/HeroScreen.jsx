@@ -1,15 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { HeroList } from './HeroList';
+import { HeroStats } from './HeroStats';
 
 export const HeroScreen = () => {
-  const heroTeamIds = useSelector((state) => state.heroes);
-  console.log(heroTeamIds);
-
   return (
-    <div>
+    <>
+      <HeroStats />
       <HeroList />
-      <hr />
-    </div>
+    </>
   );
 };

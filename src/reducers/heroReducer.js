@@ -3,6 +3,7 @@ import { types } from '../types/types';
 const initialState = {
   heroSearch: [],
   heroTeamIds: [],
+  heroIds: [],
   heroTeam: [],
 };
 
@@ -16,6 +17,8 @@ export const heroReducer = (state = initialState, action) => {
       return { ...initialState };
     case types.HeroGetById:
       return { ...state, heroTeam: [...state.heroTeam, action.payload] };
+    case types.HeroId:
+      return { ...state, heroIds: [...state.heroIds, action.payload] };
     default:
       return state;
   }

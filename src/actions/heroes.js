@@ -5,7 +5,7 @@ export const startSearch = (query) => {
   return async (dispatch) => {
     const data = await searchHero(query);
     const heroes = data;
-    console.log(heroes);
+
     if (heroes) {
       dispatch(search(heroes));
     }
@@ -46,15 +46,22 @@ export const HeroLogout = () => ({
 
 export const startGetHeroesById = (id) => {
   return async (dispatch) => {
-    const data = await getHeroById(id);
-    console.log(data);
-    if (data) {
+    try {
+      const data = await getHeroById(id);
+      console.log(data);
       dispatch(getHeroesById(data));
+    } catch (error) {
+      console.log(error);
     }
   };
 };
 
-const getHeroesById = (data) => ({
+export const getHeroesById = (data) => ({
   type: types.HeroGetById,
-  payload: { data },
+  payload: data,
+});
+
+export const HeroId = (id) => ({
+  type: types.HeroId,
+  payload: id,
 });

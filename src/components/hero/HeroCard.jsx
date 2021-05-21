@@ -6,8 +6,10 @@ import {
   AddedGoodHero,
   AddedNeutralHero,
 } from '../../actions/validation';
-import { HeroAdd } from '../../actions/heroes';
+import { HeroAdd, HeroId } from '../../actions/heroes';
 import { Alert } from '../Alert/Alert';
+import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export const HeroCard = ({
   hasPowerstats,
@@ -21,10 +23,22 @@ export const HeroCard = ({
   connections,
   image,
 }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const { badHero, goodHero, neutralHero } = useSelector(
     (state) => state.validation
   );
+
+  const sendToHeroAdd = {
+    id,
+    name,
+    powerstats,
+    biography,
+    appearance,
+    work,
+    connections,
+    image,
+  };
 
   const handleAddHero = ({ id, biography }) => {
     const totalHeroes = badHero + goodHero + neutralHero;
@@ -37,19 +51,9 @@ export const HeroCard = ({
       if (orientation === 'bad') {
         // 3 Bad Heroes max
         if (badHero <= 2) {
-          dispatch(
-            HeroAdd({
-              id,
-              name,
-              powerstats,
-              biography,
-              appearance,
-              work,
-              connections,
-              image,
-            })
-          );
+          dispatch(HeroAdd(sendToHeroAdd));
           dispatch(AddedBadHero());
+          dispatch(HeroId(id));
         } else {
           Alert(
             'BAD orientation heroes Max',
@@ -63,19 +67,9 @@ export const HeroCard = ({
         console.log(goodHero);
         // 3 Good Heroes max
         if (goodHero <= 2) {
-          dispatch(
-            HeroAdd({
-              id,
-              name,
-              powerstats,
-              biography,
-              appearance,
-              work,
-              connections,
-              image,
-            })
-          );
+          dispatch(HeroAdd(sendToHeroAdd));
           dispatch(AddedGoodHero());
+          dispatch(HeroId(id));
         } else {
           Alert(
             'GOOD orientation heroes Max',
@@ -86,19 +80,9 @@ export const HeroCard = ({
       }
 
       if (orientation === 'neutral') {
-        dispatch(
-          HeroAdd({
-            id,
-            name,
-            powerstats,
-            biography,
-            appearance,
-            work,
-            connections,
-            image,
-          })
-        );
+        dispatch(HeroAdd(sendToHeroAdd));
         dispatch(AddedNeutralHero());
+        dispatch(HeroId(id));
       }
     } else {
       Alert(
@@ -109,41 +93,48 @@ export const HeroCard = ({
     }
   };
 
+  const preHandleAddHero = () => handleAddHero(sendToHeroAdd);
+
+  const handleSeeMore = (id) => {
+    history.push(`/hero/${id}`);
+  };
+
   return (
-    <div
-      className="my-card"
-      onClick={() =>
-        handleAddHero({
-          id,
-          name,
-          powerstats,
-          biography,
-          appearance,
-          work,
-          connections,
-          image,
-        })
-      }
+    <Link
+      to={{
+        pathname: `/hero/${id}`,
+        state: { biography, appearance, id, work, image },
+      }}
     >
-      <img src={image.url} alt={name} />
-      <div className="profile-name">{name}</div>
-      {hasPowerstats && (
-        <div className="profile-overview">
-          <div className="row">
-            <div className="col-ms-4">
-              <h3>Powerstats</h3>
-              <p>combat: {powerstats.combat}</p>
-              <p>durability: {powerstats.durability}</p>
-              <p>intelligence: {powerstats.intelligence}</p>
-              <p>power: {powerstats.power}</p>
-              <p>speed: {powerstats.speed}</p>
-              <p>strength: {powerstats.strength}</p>
+      <div
+        className="my-card"
+        onClick={
+          hasPowerstats
+            ? () => handleSeeMore(id, biography, appearance, work, image)
+            : preHandleAddHero
+        }
+      >
+        <img src={image.url} alt={name} />
+        <div className="profile-name">{name}</div>
+        {hasPowerstats && (
+          <div className="profile-overview">
+            <div className="row">
+              <div className="col-ms-4">
+                <h3>Powerstats</h3>
+                <p>combat: {powerstats.combat}</p>
+                <p>durability: {powerstats.durability}</p>
+                <p>intelligence: {powerstats.intelligence}</p>
+                <p>power: {powerstats.power}</p>
+                <p>speed: {powerstats.speed}</p>
+                <p>strength: {powerstats.strength}</p>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {cta && <div className="add">{cta}</div>}
-    </div>
+        {cta && <div className="add">{cta}</div>}
+        {/* {hasPowerstats && <button className="btn btn-primary">Delete</button>} */}
+      </div>
+    </Link>
   );
 };
