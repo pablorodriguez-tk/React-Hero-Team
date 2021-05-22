@@ -14,10 +14,10 @@ export const SearchScreen = () => {
   const totalHeroes = badHero + goodHero + neutralHero;
   const dispatch = useDispatch();
 
-  const handleSubmit = (search, { setSubmitting }) => {
+  const handleSubmit = async (search, { setSubmitting }) => {
     setSubmitting(false);
     const heroName = search.search;
-    dispatch(startSearch(heroName));
+    await dispatch(startSearch(heroName));
   };
 
   return (

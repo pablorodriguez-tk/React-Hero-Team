@@ -1,22 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
+import { getHeroById } from '../../helpers/fetch';
 
-export const HeroDetailScreen = (props) => {
-  const { state } = useLocation();
+export const HeroDetailScreen = () => {
+  const { pathname } = useLocation();
+  const [hero, setHero] = useState();
+  const [loading, setLoading] = useState(true);
 
-  const id = props.match.params.heroeId;
-  const image = state.image.url;
-  const fullName = state.biography['full-name'];
-  const weight = state.appearance.weight[1];
-  const height = state.appearance.height[1];
-  const aliases = state.biography.aliases.join(' - ');
-  const work = state.work.occupation;
-  const eyeColor = state.appearance['eye-color'];
-
+  const idFromUrl = pathname.split('/')[2];
   const history = useHistory();
+
   const handleGoBack = () => {
     history.push('/');
   };
+
+  useEffect(() => {
+    const get = async () => {
+      const data = await getHeroById(idFromUrl);
+      await setHero(data);
+      setLoading(false);
+    };
+    get();
+  }, [idFromUrl]);
+
+  if (loading) return <h1>Loading</h1>;
+
+  const fullName = hero.biography['full-name'];
+  const image = hero.image.url;
+  const weight = hero.appearance.weight[1];
+  const height = hero.appearance.height[1];
+  const aliases = hero.biography.aliases.join(' - ');
+  const work = hero.work.occupation;
+  const eyeColor = hero.appearance['eye-color'];
 
   return (
     <div className="d-flex justify-content-center">

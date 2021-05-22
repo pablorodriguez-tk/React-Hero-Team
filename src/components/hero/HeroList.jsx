@@ -6,6 +6,7 @@ import { HeroCard } from './HeroCard';
 export const HeroList = () => {
   const dispatch = useDispatch();
   const [state, setState] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const { HeroFetch } = useSelector((state) => state.heroes);
 
@@ -23,11 +24,14 @@ export const HeroList = () => {
         let newArray = prevState.push(data);
         setState(newArray);
         dispatch(heroFetch(state));
+        setLoading(false);
       });
     };
 
     get();
   }, []);
+
+  if (loading) return <h1>Loading</h1>;
 
   return (
     <div className="card-columns animate__animated animate__fadeIn">
