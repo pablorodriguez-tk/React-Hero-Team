@@ -8,7 +8,7 @@ export const HeroList = () => {
   const [state, setState] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { HeroFetch, heroIds } = useSelector((state) => state.heroes);
+  const { heroIds, heroTeamIds } = useSelector((state) => state.heroes);
 
   useEffect(() => {
     let mounted = true;
@@ -38,7 +38,7 @@ export const HeroList = () => {
 
   return (
     <div className="card-columns animate__animated animate__fadeIn">
-      {HeroFetch.map((props) => (
+      {heroTeamIds.map((props) => (
         <HeroCard
           key={props.id}
           hasPowerstats={true}

@@ -10,7 +10,7 @@ import { startLogout } from '../actions/auth';
 const AppRouter = () => {
   const dispatch = useDispatch();
   let token = localStorage.getItem('token');
-  useSelector((state) => state.auth);
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
     // if user have no token on reload page, start logout immediately
@@ -27,12 +27,12 @@ const AppRouter = () => {
             exact
             path="/login"
             component={LoginScreen}
-            isAuthenticated={!!token}
+            isAuthenticated={isLoggedIn}
           />
           <PrivateRoute
             path="/"
             component={DashboardRoutes}
-            isAuthenticated={!!token}
+            isAuthenticated={isLoggedIn}
           />
         </Switch>
       </div>
