@@ -169,52 +169,50 @@ export const HeroCard = ({
     });
   };
 
-  return (
-    <Link
-      to={{
-        pathname: `/hero/${id}`,
-        state: { biography, appearance, id, work, image },
-      }}
-    >
+  if (hasPowerstats) {
+    return (
       <div
         className="my-card"
-        onClick={
-          hasPowerstats
-            ? () => handleSeeMore(id, biography, appearance, work, image)
-            : preHandleAddHero
-        }
+        onClick={() => handleSeeMore(id, biography, appearance, work, image)}
       >
         <img src={image.url} alt={name} />
         <div className="profile-name">{name}</div>
         <div className="profile-orientation">{biography.alignment}</div>
-        {hasPowerstats && (
-          <div className="profile-overview">
-            <div className="row">
-              <div className="col-ms-4">
-                <h3>Powerstats</h3>
-                <p>combat: {powerstats.combat}</p>
-                <p>durability: {powerstats.durability}</p>
-                <p>intelligence: {powerstats.intelligence}</p>
-                <p>power: {powerstats.power}</p>
-                <p>speed: {powerstats.speed}</p>
-                <p>strength: {powerstats.strength}</p>
-              </div>
+        <div className="profile-overview">
+          <div className="row">
+            <div className="col-ms-4">
+              <h3>Powerstats</h3>
+              <p>combat: {powerstats.combat}</p>
+              <p>durability: {powerstats.durability}</p>
+              <p>intelligence: {powerstats.intelligence}</p>
+              <p>power: {powerstats.power}</p>
+              <p>speed: {powerstats.speed}</p>
+              <p>strength: {powerstats.strength}</p>
             </div>
           </div>
-        )}
-
-        {cta && <div className="add">{cta}</div>}
-        {hasPowerstats && (
-          <button
-            onClick={() => {
-              handleDelete(id);
-            }}
-            className="btn btn-outline-danger profile-delete-button"
-          >
-            Delete
-          </button>
-        )}
+        </div>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleDelete(id);
+          }}
+          className="btn btn-outline-danger profile-delete-button"
+        >
+          Delete
+        </button>
       </div>
-    </Link>
-  );
+    );
+  }
+
+  if (!hasPowerstats) {
+    return (
+      <div className="my-card" onClick={preHandleAddHero}>
+        <img src={image.url} alt={name} />
+        <div className="profile-name">{name}</div>
+        <div className="profile-orientation">{biography.alignment}</div>
+        {cta && <div className="add">{cta}</div>}
+      </div>
+    );
+  }
 };
