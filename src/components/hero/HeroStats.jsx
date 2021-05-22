@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 export const HeroStats = () => {
-  const { heroTeamIds } = useSelector((state) => state.heroes);
+  const { heroTeam } = useSelector((state) => state.heroes);
 
   // States for powerstats
   const [AverageIntelligence, setAverageIntelligence] = useState(0);
@@ -20,19 +20,19 @@ export const HeroStats = () => {
   const [maxPowerStat, setMaxPowerStat] = useState('');
 
   // Arrays of each powerstats
-  const intelligenceArray = heroTeamIds.map((el) => el.powerstats.intelligence);
-  const combatArray = heroTeamIds.map((el) => el.powerstats.combat);
-  const speedArray = heroTeamIds.map((el) => el.powerstats.speed);
-  const durabilityArray = heroTeamIds.map((el) => el.powerstats.durability);
-  const PowerArray = heroTeamIds.map((el) => el.powerstats.power);
-  const StrengthArray = heroTeamIds.map((el) => el.powerstats.strength);
+  const intelligenceArray = heroTeam.map((el) => el.powerstats.intelligence);
+  const combatArray = heroTeam.map((el) => el.powerstats.combat);
+  const speedArray = heroTeam.map((el) => el.powerstats.speed);
+  const durabilityArray = heroTeam.map((el) => el.powerstats.durability);
+  const PowerArray = heroTeam.map((el) => el.powerstats.power);
+  const StrengthArray = heroTeam.map((el) => el.powerstats.strength);
 
   // Arrays of each appearance
-  const heightArray = heroTeamIds.map((el) => el.appearance.height[1]);
-  const weightArray = heroTeamIds.map((el) => el.appearance.weight[1]);
+  const heightArray = heroTeam.map((el) => el.appearance.height[1]);
+  const weightArray = heroTeam.map((el) => el.appearance.weight[1]);
 
   useEffect(() => {
-    if (heroTeamIds.length > 0) {
+    if (heroTeam.length > 0) {
       // Function to calculate average
       const average = (array) =>
         array.reduce((a, b) => a + (parseInt(b) || 0), 0) / array.length;
@@ -89,7 +89,7 @@ export const HeroStats = () => {
     combatArray,
     durabilityArray,
     heightArray,
-    heroTeamIds.length,
+    heroTeam.length,
     intelligenceArray,
     speedArray,
     weightArray,

@@ -8,13 +8,13 @@ export const HeroList = () => {
   const [state, setState] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { heroIds, heroTeamIds } = useSelector((state) => state.heroes);
+  const { heroTeam } = useSelector((state) => state.heroes);
 
   useEffect(() => {
     let mounted = true;
 
     const get = () => {
-      heroIds.map(async (id) => {
+      heroTeam.map(async (id) => {
         const data = await dispatch(startGetHeroesById(id));
 
         if (mounted) {
@@ -38,7 +38,7 @@ export const HeroList = () => {
 
   return (
     <div className="card-columns animate__animated animate__fadeIn">
-      {heroTeamIds.map((props) => (
+      {heroTeam.map((props) => (
         <HeroCard
           key={props.id}
           hasPowerstats={true}

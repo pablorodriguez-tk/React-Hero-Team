@@ -55,12 +55,12 @@ export const startGetHeroesById = (id) => {
   };
 };
 
-export const HeroId = (id) => ({
-  type: types.HeroId,
-  payload: id,
-});
-
 export const heroFetch = (data) => ({
   type: types.HeroFetch,
   payload: data,
+});
+
+export const heroDelete = (id) => ({
+  type: types.HeroDelete,
+  payload: id,
 });

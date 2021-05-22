@@ -6,10 +6,9 @@ import {
   AddedGoodHero,
   AddedNeutralHero,
 } from '../../actions/validation';
-import { HeroAdd, HeroId } from '../../actions/heroes';
+import { HeroAdd, heroDelete } from '../../actions/heroes';
 import { Alert } from '../Alert/Alert';
 import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 export const HeroCard = ({
@@ -29,7 +28,7 @@ export const HeroCard = ({
   const { badHero, goodHero, neutralHero } = useSelector(
     (state) => state.validation
   );
-  const { heroIds } = useSelector((state) => state.heroes);
+  const { heroTeam } = useSelector((state) => state.heroes);
 
   const sendToHeroAdd = {
     id,
@@ -41,12 +40,13 @@ export const HeroCard = ({
     connections,
     image,
   };
+  const heroids = heroTeam.map((hero) => hero.id);
 
   const handleAddHero = ({ id, biography }) => {
     const totalHeroes = badHero + goodHero + neutralHero;
     const orientation = biography.alignment;
     const left = 5 - totalHeroes;
-    if (!heroIds.includes(id)) {
+    if (!heroids.includes(id)) {
       if (totalHeroes <= 5) {
         // 6 Heroes max
         if (orientation === 'bad') {
@@ -54,7 +54,6 @@ export const HeroCard = ({
           if (badHero <= 2) {
             dispatch(HeroAdd(sendToHeroAdd));
             dispatch(AddedBadHero());
-            dispatch(HeroId(id));
 
             if (left === 0) {
               Alert(
@@ -83,7 +82,6 @@ export const HeroCard = ({
           if (goodHero <= 2) {
             dispatch(HeroAdd(sendToHeroAdd));
             dispatch(AddedGoodHero());
-            dispatch(HeroId(id));
             if (left === 0) {
               Alert(
                 `${name} added to your team`,
@@ -109,7 +107,6 @@ export const HeroCard = ({
         if (orientation === 'neutral') {
           dispatch(HeroAdd(sendToHeroAdd));
           dispatch(AddedNeutralHero());
-          dispatch(HeroId(id));
           if (left === 0) {
             Alert(
               `${name} added to your team`,
@@ -148,6 +145,7 @@ export const HeroCard = ({
 
   const handleDelete = (id) => {
     console.log(`Hero with id:${id} was deleted from your team`);
+    dispatch(heroDelete(id));
 
     Swal.fire({
       title: 'Are you sure?',
@@ -191,9 +189,9 @@ export const HeroCard = ({
             </div>
           </div>
         </div>
+        {cta && <div className="add">{cta}</div>}
         <button
           onClick={(e) => {
-            e.preventDefault();
             e.stopPropagation();
             handleDelete(id);
           }}
