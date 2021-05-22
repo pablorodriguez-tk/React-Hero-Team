@@ -7,11 +7,7 @@ import * as Yup from 'yup';
 
 export const SearchScreen = () => {
   const { heroSearch } = useSelector((state) => state.heroes);
-  const { badHero, goodHero, neutralHero } = useSelector(
-    (state) => state.validation
-  );
 
-  const totalHeroes = badHero + goodHero + neutralHero;
   const dispatch = useDispatch();
 
   const handleSubmit = async (search, { setSubmitting }) => {
@@ -62,20 +58,6 @@ export const SearchScreen = () => {
           </div>
         )}
       </Formik>
-      <div className="card container" style={{ width: '19rem' }}>
-        <p>Find your 6 favorite heroes to build the team</p>
-        <p>
-          Maximum 3 heroes of good orientation and 3 heroes of bad orientation
-        </p>
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">
-            Total Heroes Selected: {totalHeroes} (Max 6)
-          </li>
-          <li className="list-group-item">Bad Heroes: {badHero} (Max 3)</li>
-          <li className="list-group-item">Good Heroes: {goodHero} (Max 3)</li>
-          <li className="list-group-item">Neutral Heroes: {neutralHero}</li>
-        </ul>
-      </div>
       <div className="container">
         {heroSearch.map((hero) => (
           <HeroCard cta={'Click to add to team'} key={hero.id} {...hero} />

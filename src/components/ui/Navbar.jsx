@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { startLogout } from '../../actions/auth';
 import { HeroLogout } from '../../actions/heroes';
-import { validationLogout } from '../../actions/validation';
 
 export const Navbar = () => {
   const dispatch = useDispatch();
@@ -11,7 +10,6 @@ export const Navbar = () => {
   const handleLogout = () => {
     dispatch(startLogout());
     dispatch(HeroLogout());
-    dispatch(validationLogout());
   };
 
   return (

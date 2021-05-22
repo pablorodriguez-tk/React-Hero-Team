@@ -1,11 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './heroCard.css';
-import {
-  AddedBadHero,
-  AddedGoodHero,
-  AddedNeutralHero,
-} from '../../actions/validation';
 import { HeroAdd, heroDelete } from '../../actions/heroes';
 import { Alert } from '../Alert/Alert';
 import { useHistory } from 'react-router';
@@ -25,9 +20,6 @@ export const HeroCard = ({
 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { badHero, goodHero, neutralHero } = useSelector(
-    (state) => state.validation
-  );
   const { heroTeam } = useSelector((state) => state.heroes);
 
   const sendToHeroAdd = {
@@ -42,8 +34,37 @@ export const HeroCard = ({
   };
   const heroids = heroTeam.map((hero) => hero.id);
 
+  //Validation Good, Bad, Neutral heroes
+  const countBy = (arr, prop) =>
+    arr.reduce(
+      (prev, curr) => (
+        // eslint-disable-next-line no-sequences
+        (prev[curr.biography[prop]] = ++prev[curr.biography[prop]] || 1), prev
+      ),
+      {}
+    );
+
+  let totalHeroes = 0;
+  let good = 0;
+  let bad = 0;
+  let neutral = 0;
+
+  if (heroTeam.length > 0) {
+    const alignment = countBy(heroTeam, 'alignment');
+
+    if (alignment.good) {
+      good = alignment.good;
+    }
+    if (alignment.bad) {
+      bad = alignment.bad;
+    }
+    if (alignment.neutral) {
+      neutral = alignment.neutral;
+    }
+    totalHeroes = good + neutral + bad;
+  }
+
   const handleAddHero = ({ id, biography }) => {
-    const totalHeroes = badHero + goodHero + neutralHero;
     const orientation = biography.alignment;
     const left = 5 - totalHeroes;
     if (!heroids.includes(id)) {
@@ -51,9 +72,8 @@ export const HeroCard = ({
         // 6 Heroes max
         if (orientation === 'bad') {
           // 3 Bad Heroes max
-          if (badHero <= 2) {
+          if (bad <= 2) {
             dispatch(HeroAdd(sendToHeroAdd));
-            dispatch(AddedBadHero());
 
             if (left === 0) {
               Alert(
@@ -79,9 +99,8 @@ export const HeroCard = ({
 
         if (orientation === 'good') {
           // 3 Good Heroes max
-          if (goodHero <= 2) {
+          if (good <= 2) {
             dispatch(HeroAdd(sendToHeroAdd));
-            dispatch(AddedGoodHero());
             if (left === 0) {
               Alert(
                 `${name} added to your team`,
@@ -106,7 +125,6 @@ export const HeroCard = ({
 
         if (orientation === 'neutral') {
           dispatch(HeroAdd(sendToHeroAdd));
-          dispatch(AddedNeutralHero());
           if (left === 0) {
             Alert(
               `${name} added to your team`,
@@ -144,9 +162,6 @@ export const HeroCard = ({
   };
 
   const handleDelete = (id) => {
-    console.log(`Hero with id:${id} was deleted from your team`);
-    dispatch(heroDelete(id));
-
     Swal.fire({
       title: 'Are you sure?',
       text: `This will delete ${name} from your team!`,
@@ -158,6 +173,8 @@ export const HeroCard = ({
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
+        console.log(`Hero with id:${id} was deleted from your team`);
+        dispatch(heroDelete(id));
         Swal.fire(
           'Deleted!',
           'Your hero has been deleted from your team.',
