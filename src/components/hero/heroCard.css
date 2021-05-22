@@ -89,6 +89,15 @@
   padding-left: 25px;
 }
 
+.my-card .profile-delete-button {
+  position: absolute;
+  font-weight: bold;
+  font-size: large;
+  padding-left: 25px;
+  top: 0px;
+  right: 0px;
+}
+
 .my-card .profile-overview p {
   color: rgba(255, 255, 255, 0.7);
   padding-left: 25px;

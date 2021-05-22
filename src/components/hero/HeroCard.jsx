@@ -10,6 +10,7 @@ import { HeroAdd, HeroId } from '../../actions/heroes';
 import { Alert } from '../Alert/Alert';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export const HeroCard = ({
   hasPowerstats,
@@ -44,7 +45,7 @@ export const HeroCard = ({
   const handleAddHero = ({ id, biography }) => {
     const totalHeroes = badHero + goodHero + neutralHero;
     const orientation = biography.alignment;
-
+    const left = 5 - totalHeroes;
     if (!heroIds.includes(id)) {
       if (totalHeroes <= 5) {
         // 6 Heroes max
@@ -54,6 +55,20 @@ export const HeroCard = ({
             dispatch(HeroAdd(sendToHeroAdd));
             dispatch(AddedBadHero());
             dispatch(HeroId(id));
+
+            if (left === 0) {
+              Alert(
+                `${name} added to your team`,
+                `Your team is complete`,
+                'success'
+              );
+            } else {
+              Alert(
+                `${name} added to your team`,
+                `You left to add ${left} hero to complete your team`,
+                'success'
+              );
+            }
           } else {
             Alert(
               'BAD orientation heroes Max',
@@ -69,6 +84,19 @@ export const HeroCard = ({
             dispatch(HeroAdd(sendToHeroAdd));
             dispatch(AddedGoodHero());
             dispatch(HeroId(id));
+            if (left === 0) {
+              Alert(
+                `${name} added to your team`,
+                `Your team is complete`,
+                'success'
+              );
+            } else {
+              Alert(
+                `${name} added to your team`,
+                `You left to add ${left} hero to complete your team`,
+                'success'
+              );
+            }
           } else {
             Alert(
               'GOOD orientation heroes Max',
@@ -82,6 +110,19 @@ export const HeroCard = ({
           dispatch(HeroAdd(sendToHeroAdd));
           dispatch(AddedNeutralHero());
           dispatch(HeroId(id));
+          if (left === 0) {
+            Alert(
+              `${name} added to your team`,
+              `Your team is complete`,
+              'success'
+            );
+          } else {
+            Alert(
+              `${name} added to your team`,
+              `You left to add ${left} hero to complete your team`,
+              'success'
+            );
+          }
         }
       } else {
         Alert(
@@ -91,7 +132,11 @@ export const HeroCard = ({
         );
       }
     } else {
-      Alert('Repeated hero', 'Please select another', 'warning');
+      Alert(
+        `${name} is already on your team`,
+        'Please select another hero',
+        'warning'
+      );
     }
   };
 
@@ -99,6 +144,29 @@ export const HeroCard = ({
 
   const handleSeeMore = (id) => {
     history.push(`/hero/${id}`);
+  };
+
+  const handleDelete = (id) => {
+    console.log(`Hero with id:${id} was deleted from your team`);
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `This will delete ${name} from your team!`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your hero has been deleted from your team.',
+          'success'
+        );
+      }
+    });
   };
 
   return (
@@ -136,14 +204,16 @@ export const HeroCard = ({
         )}
 
         {cta && <div className="add">{cta}</div>}
-        {/* {hasPowerstats && (
-            <button
-              onClick={onClick2}
-              className="btn btn-primary profile-overview"
-            >
-              Delete
-            </button>
-          )} */}
+        {hasPowerstats && (
+          <button
+            onClick={() => {
+              handleDelete(id);
+            }}
+            className="btn btn-outline-danger profile-delete-button"
+          >
+            Delete
+          </button>
+        )}
       </div>
     </Link>
   );
