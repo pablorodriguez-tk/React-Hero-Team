@@ -48,18 +48,12 @@ export const startGetHeroesById = (id) => {
   return async (dispatch) => {
     try {
       const data = await getHeroById(id);
-      dispatch(getHeroesById(data));
       return data;
     } catch (error) {
       console.log(error);
     }
   };
 };
-
-export const getHeroesById = (data) => ({
-  type: types.HeroGetById,
-  payload: data,
-});
 
 export const HeroId = (id) => ({
   type: types.HeroId,

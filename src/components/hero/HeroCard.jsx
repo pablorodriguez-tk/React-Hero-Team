@@ -28,6 +28,7 @@ export const HeroCard = ({
   const { badHero, goodHero, neutralHero } = useSelector(
     (state) => state.validation
   );
+  const { heroIds } = useSelector((state) => state.heroes);
 
   const sendToHeroAdd = {
     id,
@@ -44,49 +45,53 @@ export const HeroCard = ({
     const totalHeroes = badHero + goodHero + neutralHero;
     const orientation = biography.alignment;
 
-    // 6 Heroes max
-    if (totalHeroes <= 5) {
-      if (orientation === 'bad') {
-        // 3 Bad Heroes max
-        if (badHero <= 2) {
-          dispatch(HeroAdd(sendToHeroAdd));
-          dispatch(AddedBadHero());
-          dispatch(HeroId(id));
-        } else {
-          Alert(
-            'BAD orientation heroes Max',
-            'You have reached the maximum number of BAD orientation hero allowed on your team - (MAX: 3 BAD ORIENTATION HEROES)',
-            'warning'
-          );
+    if (!heroIds.includes(id)) {
+      if (totalHeroes <= 5) {
+        // 6 Heroes max
+        if (orientation === 'bad') {
+          // 3 Bad Heroes max
+          if (badHero <= 2) {
+            dispatch(HeroAdd(sendToHeroAdd));
+            dispatch(AddedBadHero());
+            dispatch(HeroId(id));
+          } else {
+            Alert(
+              'BAD orientation heroes Max',
+              'You have reached the maximum number of BAD orientation hero allowed on your team - (MAX: 3 BAD ORIENTATION HEROES)',
+              'warning'
+            );
+          }
         }
-      }
 
-      if (orientation === 'good') {
-        // 3 Good Heroes max
-        if (goodHero <= 2) {
-          dispatch(HeroAdd(sendToHeroAdd));
-          dispatch(AddedGoodHero());
-          dispatch(HeroId(id));
-        } else {
-          Alert(
-            'GOOD orientation heroes Max',
-            'You have reached the maximum number of GOOD orientation hero allowed on your team - (MAX: 3 GOOD ORIENTATION HEROES)',
-            'warning'
-          );
+        if (orientation === 'good') {
+          // 3 Good Heroes max
+          if (goodHero <= 2) {
+            dispatch(HeroAdd(sendToHeroAdd));
+            dispatch(AddedGoodHero());
+            dispatch(HeroId(id));
+          } else {
+            Alert(
+              'GOOD orientation heroes Max',
+              'You have reached the maximum number of GOOD orientation hero allowed on your team - (MAX: 3 GOOD ORIENTATION HEROES)',
+              'warning'
+            );
+          }
         }
-      }
 
-      if (orientation === 'neutral') {
-        dispatch(HeroAdd(sendToHeroAdd));
-        dispatch(AddedNeutralHero());
-        dispatch(HeroId(id));
+        if (orientation === 'neutral') {
+          dispatch(HeroAdd(sendToHeroAdd));
+          dispatch(AddedNeutralHero());
+          dispatch(HeroId(id));
+        }
+      } else {
+        Alert(
+          'Team complete',
+          'You have reached the maximum number of heroes allowed on your team. If you want to add another hero you have to delete one first - (MAX: 6 HEROES)',
+          'warning'
+        );
       }
     } else {
-      Alert(
-        'Team complete',
-        'You have reached the maximum number of heroes allowed on your team. If you want to add another hero you have to delete one first - (MAX: 6 HEROES)',
-        'warning'
-      );
+      Alert('Repeated hero', 'Please select another', 'warning');
     }
   };
 
