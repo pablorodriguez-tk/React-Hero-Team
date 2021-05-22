@@ -29,13 +29,6 @@ export const HeroCard = ({
     (state) => state.validation
   );
 
-  const saveIdLocalStorage = (id) => {
-    let storage = JSON.parse(localStorage.getItem('id'));
-    storage = storage ? storage : [];
-    storage.push(id);
-    localStorage.setItem('id', JSON.stringify(storage));
-  };
-
   const sendToHeroAdd = {
     id,
     name,
@@ -59,7 +52,6 @@ export const HeroCard = ({
           dispatch(HeroAdd(sendToHeroAdd));
           dispatch(AddedBadHero());
           dispatch(HeroId(id));
-          saveIdLocalStorage(id);
         } else {
           Alert(
             'BAD orientation heroes Max',
@@ -75,7 +67,6 @@ export const HeroCard = ({
           dispatch(HeroAdd(sendToHeroAdd));
           dispatch(AddedGoodHero());
           dispatch(HeroId(id));
-          saveIdLocalStorage(id);
         } else {
           Alert(
             'GOOD orientation heroes Max',
@@ -89,7 +80,6 @@ export const HeroCard = ({
         dispatch(HeroAdd(sendToHeroAdd));
         dispatch(AddedNeutralHero());
         dispatch(HeroId(id));
-        saveIdLocalStorage(id);
       }
     } else {
       Alert(

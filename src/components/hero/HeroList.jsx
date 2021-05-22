@@ -8,16 +8,13 @@ export const HeroList = () => {
   const [state, setState] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { HeroFetch } = useSelector((state) => state.heroes);
+  const { HeroFetch, heroIds } = useSelector((state) => state.heroes);
 
   useEffect(() => {
     let mounted = true;
-    //Read Id from localStorage
-    let localIds = JSON.parse(localStorage.getItem('id'));
-    localIds = localIds ? localIds : [];
 
     const get = () => {
-      localIds.map(async (id) => {
+      heroIds.map(async (id) => {
         const data = await dispatch(startGetHeroesById(id));
 
         if (mounted) {
