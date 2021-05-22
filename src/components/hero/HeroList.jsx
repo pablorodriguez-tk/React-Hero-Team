@@ -6,24 +6,29 @@ import { HeroCard } from './HeroCard';
 export const HeroList = () => {
   const dispatch = useDispatch();
   const [state, setState] = useState([]);
-  const { heroIds, heroTeam, HeroFetch } = useSelector((state) => state.heroes);
+
+  const { HeroFetch } = useSelector((state) => state.heroes);
 
   useEffect(() => {
+    //Read Id from localStorage
+    let localIds = JSON.parse(localStorage.getItem('id'));
+    localIds = localIds ? localIds : [];
+
     const get = () => {
-      heroIds.map(async (id) => {
+      localIds.map(async (id) => {
         const data = await dispatch(startGetHeroesById(id));
-        let prevState = state;
+
+        let prevState = [];
+        prevState = state;
         let newArray = prevState.push(data);
         setState(newArray);
         dispatch(heroFetch(state));
       });
     };
 
-    //dispatch todos los datos en store
-
     get();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <div className="card-columns animate__animated animate__fadeIn">
       {HeroFetch.map((props) => (
