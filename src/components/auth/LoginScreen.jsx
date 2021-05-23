@@ -8,9 +8,9 @@ import * as Yup from 'yup';
 export const LoginScreen = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting }) => {
     setSubmitting(false);
-    dispatch(startLogin(values));
+    await dispatch(startLogin(values));
   };
 
   return (
@@ -45,7 +45,9 @@ export const LoginScreen = () => {
 
               <div className="input-group mb-4">
                 {formik.touched.email && formik.errors.email ? (
-                  <div className="error">{formik.errors.email}</div>
+                  <div className="error" data-testid="email-error">
+                    {formik.errors.email}
+                  </div>
                 ) : null}
               </div>
 
@@ -65,7 +67,9 @@ export const LoginScreen = () => {
 
               <div className="input-group mb-5">
                 {formik.touched.password && formik.errors.password ? (
-                  <div className="error">{formik.errors.password}</div>
+                  <div className="error" data-testid="password-error">
+                    {formik.errors.password}
+                  </div>
                 ) : null}
               </div>
 
