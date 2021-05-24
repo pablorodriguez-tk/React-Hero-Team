@@ -28,7 +28,7 @@ export const LoginScreen = () => {
       {(formik) => (
         <div className="container login-container animate__animated animate__fadeIn animate__faster ">
           <div className="col-md-12 login-form">
-            <h3>Login</h3>
+            <h3 data-testid="loginScreen">Login</h3>
             <form onSubmit={formik.handleSubmit}>
               <div className="input-group mb-1">
                 <input

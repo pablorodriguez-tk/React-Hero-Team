@@ -19,7 +19,6 @@ const initState = {
     isLoggedIn: false,
   },
   heroes: {
-    heroSearch: [],
     heroTeam: [],
     HeroFetch: [],
   },

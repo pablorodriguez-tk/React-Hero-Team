@@ -1,21 +1,5 @@
-import { searchHero, getHeroById } from '../helpers/fetch';
+import { getHeroById } from '../helpers/fetch';
 import { types } from '../types/types';
-
-export const startSearch = (query) => {
-  return async (dispatch) => {
-    const data = await searchHero(query);
-    const heroes = data;
-
-    if (heroes) {
-      dispatch(search(heroes));
-    }
-  };
-};
-
-const search = (heroSearch) => ({
-  type: types.heroSearch,
-  payload: heroSearch,
-});
 
 export const HeroAdd = ({
   id,

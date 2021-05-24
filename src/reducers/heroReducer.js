@@ -1,15 +1,12 @@
 import { types } from '../types/types';
 
 const initialState = {
-  heroSearch: [],
   heroTeam: [],
   HeroFetch: [],
 };
 
 export const heroReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.heroSearch:
-      return { ...state, heroSearch: action.payload };
     case types.heroAdd:
       return { ...state, heroTeam: [...state.heroTeam, action.payload] };
     case types.HeroLogout:

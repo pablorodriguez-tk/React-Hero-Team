@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
@@ -11,13 +11,12 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('Test on <AppRouter/>', () => {
-  test('Should to show login screen if user is not authenticated', () => {
+  test('Should to show login screen if user is not authenticated', async () => {
     const initState = {
       auth: {
         isLoggedIn: false,
       },
       heroes: {
-        heroSearch: [],
         heroTeam: [],
         HeroFetch: [],
       },
@@ -28,26 +27,31 @@ describe('Test on <AppRouter/>', () => {
     };
 
     const store = mockStore(initState);
-    store.dispatch = jest.fn();
 
-    const component = render(
+    const wrapper = render(
       <MemoryRouter>
         <Provider store={store}>
           <AppRouter />
         </Provider>
       </MemoryRouter>
     );
-    expect(component).toMatchSnapshot();
+
+    const loginPageTitle = await wrapper.findByTestId('loginScreen');
+
+    await waitFor(() => {
+      expect(loginPageTitle).toBeInTheDocument();
+    });
+
+    expect(wrapper).toMatchSnapshot();
   });
 
-  test('Should to show Hero screen if user is authenticated', () => {
+  test('Should to show Hero screen if user is authenticated', async () => {
     const initState = {
       auth: {
         isLoggedIn: true,
         email: 'challenge@alkemy.org',
       },
       heroes: {
-        heroSearch: [],
         heroTeam: [],
         HeroFetch: [],
       },
@@ -58,15 +62,20 @@ describe('Test on <AppRouter/>', () => {
     };
 
     const store = mockStore(initState);
-    store.dispatch = jest.fn();
 
-    const component = render(
+    const wrapper = render(
       <MemoryRouter>
         <Provider store={store}>
           <AppRouter />
         </Provider>
       </MemoryRouter>
     );
-    expect(component).toMatchSnapshot();
+
+    const heroPageTitle = await wrapper.findByTestId('heroScreen');
+
+    await waitFor(() => {
+      expect(heroPageTitle).toBeInTheDocument();
+    });
+    expect(wrapper).toMatchSnapshot();
   });
 });

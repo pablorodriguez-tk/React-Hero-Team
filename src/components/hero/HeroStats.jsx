@@ -97,7 +97,6 @@ export const HeroStats = () => {
 
   return (
     <div>
-      <h1 className="d-flex justify-content-center">My hero team</h1>
       <h2 className="d-flex justify-content-center">
         Type: <b>{maxPowerStat}</b>
       </h2>

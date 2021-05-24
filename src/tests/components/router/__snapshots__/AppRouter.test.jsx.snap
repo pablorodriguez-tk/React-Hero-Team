@@ -46,12 +46,13 @@ Object {
         <div
           class="container mt-2"
         >
+          <h1
+            class="d-flex justify-content-center"
+            data-testid="heroScreen"
+          >
+            My hero team
+          </h1>
           <div>
-            <h1
-              class="d-flex justify-content-center"
-            >
-              My hero team
-            </h1>
             <h2
               class="d-flex justify-content-center"
             >
@@ -201,12 +202,13 @@ Object {
       <div
         class="container mt-2"
       >
+        <h1
+          class="d-flex justify-content-center"
+          data-testid="heroScreen"
+        >
+          My hero team
+        </h1>
         <div>
-          <h1
-            class="d-flex justify-content-center"
-          >
-            My hero team
-          </h1>
           <h2
             class="d-flex justify-content-center"
           >
@@ -379,7 +381,9 @@ Object {
           <div
             class="col-md-12 login-form"
           >
-            <h3>
+            <h3
+              data-testid="loginScreen"
+            >
               Login
             </h3>
             <form>
@@ -434,7 +438,9 @@ Object {
         <div
           class="col-md-12 login-form"
         >
-          <h3>
+          <h3
+            data-testid="loginScreen"
+          >
             Login
           </h3>
           <form>
