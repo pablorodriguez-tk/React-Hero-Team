@@ -20,7 +20,7 @@ export const HeroStats = () => {
   const [maxPowerStat, setMaxPowerStat] = useState('');
 
   // Arrays of each powerstats
-  const intelligenceArray = heroTeam.map((el) => el.powerstats.intelligence);
+  let intelligenceArray = heroTeam.map((el) => el.powerstats.intelligence);
   const combatArray = heroTeam.map((el) => el.powerstats.combat);
   const speedArray = heroTeam.map((el) => el.powerstats.speed);
   const durabilityArray = heroTeam.map((el) => el.powerstats.durability);
@@ -32,51 +32,59 @@ export const HeroStats = () => {
   const weightArray = heroTeam.map((el) => el.appearance.weight[1]);
 
   useEffect(() => {
-    if (heroTeam.length > 0) {
-      // Function to calculate average
-      const average = (array) =>
+    // Function to calculate average
+    const average = (array) => {
+      const av =
         array.reduce((a, b) => a + (parseInt(b) || 0), 0) / array.length;
 
-      // Function to calculate the max powerstat
-      const maxPowerStats = (powerStatsObject) => {
-        var max = -Infinity;
-        var maxVar = null;
-        for (var key in powerStatsObject) {
-          var num = powerStatsObject[key];
-          if (num > max) {
-            max = num;
-            maxVar = key;
-          }
-          max = (num > max && num) || max;
+      if (isNaN(av)) {
+        return 0;
+      }
+      return av;
+    };
+
+    // Function to calculate the max powerstat
+    const maxPowerStats = (powerStatsObject) => {
+      var max = 0;
+      var maxVar = null;
+      for (var key in powerStatsObject) {
+        var num = powerStatsObject[key];
+        if (num > max) {
+          max = num;
+          maxVar = key;
         }
-        return maxVar;
-      };
+        max = (num > max && num) || max;
+      }
 
-      // Set on state the average powerstats
-      setAverageIntelligence(average(intelligenceArray).toFixed(1));
-      setAverageCombat(average(combatArray).toFixed(1));
-      setAverageSpeed(average(speedArray).toFixed(1));
-      setAverageDurability(average(durabilityArray).toFixed(1));
-      setAveragePower(average(PowerArray).toFixed(1));
-      setAverageStrength(average(StrengthArray).toFixed(1));
+      return maxVar;
+    };
 
-      // Set on state the average appearance
-      setAverageHeight(average(heightArray).toFixed(1));
-      setAverageWeight(average(weightArray).toFixed(1));
+    // Set on state the average powerstats
 
-      // Obj for all the powerstats
-      var powerStatsObject = {
-        Intelligence: AverageIntelligence,
-        Combat: AverageCombat,
-        Speed: AverageSpeed,
-        Durability: AverageDurability,
-        Power: AveragePower,
-        Strength: AverageStrength,
-      };
+    setAverageIntelligence(average(intelligenceArray).toFixed(1));
+    setAverageCombat(average(combatArray).toFixed(1));
+    setAverageSpeed(average(speedArray).toFixed(1));
+    setAverageDurability(average(durabilityArray).toFixed(1));
+    setAveragePower(average(PowerArray).toFixed(1));
+    setAverageStrength(average(StrengthArray).toFixed(1));
 
-      // Set on state max powerstats
-      setMaxPowerStat(maxPowerStats(powerStatsObject));
-    }
+    // Set on state the average appearance
+    setAverageHeight(average(heightArray).toFixed(1));
+    setAverageWeight(average(weightArray).toFixed(1));
+
+    // Obj for all the powerstats
+    var powerStatsObject = {
+      Intelligence: AverageIntelligence,
+      Combat: AverageCombat,
+      Speed: AverageSpeed,
+      Durability: AverageDurability,
+      Power: AveragePower,
+      Strength: AverageStrength,
+    };
+
+    // Set on state max powerstats
+
+    setMaxPowerStat(maxPowerStats(powerStatsObject));
   }, [
     AverageCombat,
     AverageDurability,

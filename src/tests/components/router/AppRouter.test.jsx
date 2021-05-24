@@ -18,7 +18,6 @@ describe('Test on <AppRouter/>', () => {
       },
       heroes: {
         heroTeam: [],
-        HeroFetch: [],
       },
       _persist: {
         version: -1,
@@ -53,7 +52,6 @@ describe('Test on <AppRouter/>', () => {
       },
       heroes: {
         heroTeam: [],
-        HeroFetch: [],
       },
       _persist: {
         version: -1,

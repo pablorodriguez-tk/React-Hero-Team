@@ -173,7 +173,6 @@ export const HeroCard = ({
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(`Hero with id:${id} was deleted from your team`);
         dispatch(heroDelete(id));
         Swal.fire(
           'Deleted!',

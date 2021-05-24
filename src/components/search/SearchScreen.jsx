@@ -14,17 +14,22 @@ export const SearchScreen = ({ history }) => {
 
   useEffect(() => {
     let mounted = true;
+
     const get = async () => {
       const heroName = q;
       if (mounted) {
         const response = await searchHero(heroName);
+        setLoading(false);
         if (response) {
           setHeroSearch(response);
         }
       }
     };
-    setLoading(false);
-    get();
+    if (q) {
+      get();
+    } else {
+      setLoading(false);
+    }
 
     return () => {
       mounted = false;

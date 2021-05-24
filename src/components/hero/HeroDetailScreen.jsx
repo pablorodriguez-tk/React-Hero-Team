@@ -56,7 +56,7 @@ export const HeroDetailScreen = () => {
               <hr />
               <p className="d-flex justify-content-end">
                 <button onClick={handleGoBack} className="btn btn-primary">
-                  GoBack
+                  Go Back
                 </button>
               </p>
             </div>

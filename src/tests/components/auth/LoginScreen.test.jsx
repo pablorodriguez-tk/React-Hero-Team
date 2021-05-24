@@ -20,7 +20,6 @@ const initState = {
   },
   heroes: {
     heroTeam: [],
-    HeroFetch: [],
   },
   _persist: {
     version: -1,

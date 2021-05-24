@@ -2,7 +2,6 @@ import { types } from '../types/types';
 
 const initialState = {
   heroTeam: [],
-  HeroFetch: [],
 };
 
 export const heroReducer = (state = initialState, action) => {
@@ -11,8 +10,6 @@ export const heroReducer = (state = initialState, action) => {
       return { ...state, heroTeam: [...state.heroTeam, action.payload] };
     case types.HeroLogout:
       return { ...initialState };
-    case types.HeroFetch:
-      return { ...state, HeroFetch: action.payload };
     case types.HeroDelete:
       return {
         ...state,

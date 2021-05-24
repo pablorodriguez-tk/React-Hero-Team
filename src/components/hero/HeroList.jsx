@@ -1,40 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { heroFetch, startGetHeroesById } from '../../actions/heroes';
+import React from 'react';
+import { useSelector } from 'react-redux';
+
 import { HeroCard } from './HeroCard';
 
 export const HeroList = () => {
-  const dispatch = useDispatch();
-  const [state, setState] = useState([]);
-  const [loading, setLoading] = useState(true);
-
   const { heroTeam } = useSelector((state) => state.heroes);
-
-  useEffect(() => {
-    let mounted = true;
-
-    const get = () => {
-      heroTeam.map(async (id) => {
-        const data = await dispatch(startGetHeroesById(id));
-
-        if (mounted) {
-          let prevState = [];
-          prevState = state;
-          let newArray = prevState.push(data);
-          setState(newArray);
-          dispatch(heroFetch(state));
-        }
-      });
-      setLoading(false);
-    };
-    get();
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  if (loading) return <h1>Loading</h1>;
 
   return (
     <div className="card-columns animate__animated animate__fadeIn">
