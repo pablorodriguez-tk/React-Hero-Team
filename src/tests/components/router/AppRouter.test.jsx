@@ -10,6 +10,8 @@ import { MemoryRouter } from 'react-router';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
+beforeEach(() => {});
+
 describe('Test on <AppRouter/>', () => {
   test('Should to show login screen if user is not authenticated', async () => {
     const initState = {

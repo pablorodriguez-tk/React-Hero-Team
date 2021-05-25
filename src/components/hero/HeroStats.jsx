@@ -104,13 +104,13 @@ export const HeroStats = () => {
   ]);
 
   return (
-    <div>
-      <h2 className="d-flex justify-content-center">
+    <div className="animate__animated animate__fadeIn">
+      <h2 className="d-flex justify-content-center ">
         Type: <b>{maxPowerStat}</b>
       </h2>
       <hr />
       <div className="row">
-        <div className="col-6 text-left">
+        <div className="col-6 text-center">
           <h2>Average powerstats</h2>
 
           <ul className="list-group list-group-flush">
@@ -134,7 +134,7 @@ export const HeroStats = () => {
             </li>
           </ul>
         </div>
-        <div className="col-6 text-left">
+        <div className="col-6 text-center">
           <h2>Average height and weight</h2>
           <ul className="list-group list-group-flush">
             <li className="list-group-item">

@@ -5,6 +5,7 @@ import { getHeroById } from '../../helpers/fetch';
 export const HeroDetailScreen = () => {
   const { pathname } = useLocation();
   const [hero, setHero] = useState();
+  const [mounted, setMounted] = useState(true);
   const [loading, setLoading] = useState(true);
 
   const idFromUrl = pathname.split('/')[2];
@@ -17,11 +18,23 @@ export const HeroDetailScreen = () => {
   useEffect(() => {
     const get = async () => {
       const data = await getHeroById(idFromUrl);
-      await setHero(data);
+
+      if (data.response === 'error') {
+        history.push('/');
+        setLoading(false);
+      }
+      if (mounted) {
+        setHero(data);
+      }
       setLoading(false);
     };
+
     get();
-  }, [idFromUrl]);
+
+    return () => {
+      setMounted(false);
+    };
+  }, [idFromUrl, history, mounted]);
 
   if (loading) return <h1>Loading</h1>;
 

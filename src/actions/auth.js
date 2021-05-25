@@ -3,7 +3,8 @@ import { types } from '../types/types';
 
 export const startLogin = ({ email, password }) => {
   return async (dispatch) => {
-    const token = await loginWithEmailAndPassword(email, password);
+    const { data } = await loginWithEmailAndPassword(email, password);
+    const { token } = data;
     if (token) {
       localStorage.setItem('token', token);
       dispatch(login(email));

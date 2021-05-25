@@ -186,7 +186,7 @@ export const HeroCard = ({
   if (hasPowerstats) {
     return (
       <div
-        className="my-card"
+        className="my-card animate__animated animate__fadeIn"
         onClick={() => handleSeeMore(id, biography, appearance, work, image)}
       >
         <img src={image.url} alt={name} />
@@ -219,14 +219,12 @@ export const HeroCard = ({
     );
   }
 
-  if (!hasPowerstats) {
-    return (
-      <div className="my-card" onClick={preHandleAddHero}>
-        <img src={image.url} alt={name} />
-        <div className="profile-name">{name}</div>
-        <div className="profile-orientation">{biography.alignment}</div>
-        {cta && <div className="add">{cta}</div>}
-      </div>
-    );
-  }
+  return (
+    <div className="my-card" onClick={preHandleAddHero}>
+      <img src={image.url} alt={name} />
+      <div className="profile-name">{name}</div>
+      <div className="profile-orientation">{biography.alignment}</div>
+      {cta && <div className="add">{cta}</div>}
+    </div>
+  );
 };

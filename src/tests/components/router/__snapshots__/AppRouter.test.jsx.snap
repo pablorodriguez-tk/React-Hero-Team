@@ -47,14 +47,16 @@ Object {
           class="container mt-2"
         >
           <h1
-            class="d-flex justify-content-center"
+            class="d-flex justify-content-center animate__animated animate__fadeIn"
             data-testid="heroScreen"
           >
             My hero team
           </h1>
-          <div>
+          <div
+            class="animate__animated animate__fadeIn"
+          >
             <h2
-              class="d-flex justify-content-center"
+              class="d-flex justify-content-center "
             >
               Type: 
               <b />
@@ -64,7 +66,7 @@ Object {
               class="row"
             >
               <div
-                class="col-6 text-left"
+                class="col-6 text-center"
               >
                 <h2>
                   Average powerstats
@@ -77,7 +79,7 @@ Object {
                   >
                     Combat: 
                     <b>
-                      0
+                      0.0
                     </b>
                   </li>
                   <li
@@ -85,7 +87,7 @@ Object {
                   >
                     Durability: 
                     <b>
-                      0
+                      0.0
                     </b>
                   </li>
                   <li
@@ -93,7 +95,7 @@ Object {
                   >
                     Intelligence: 
                     <b>
-                      0
+                      0.0
                     </b>
                   </li>
                   <li
@@ -101,7 +103,7 @@ Object {
                   >
                     Power: 
                     <b>
-                      0
+                      0.0
                     </b>
                   </li>
                   <li
@@ -109,7 +111,7 @@ Object {
                   >
                     Speed: 
                     <b>
-                      0
+                      0.0
                     </b>
                   </li>
                   <li
@@ -117,13 +119,13 @@ Object {
                   >
                     Strength: 
                     <b>
-                      0
+                      0.0
                     </b>
                   </li>
                 </ul>
               </div>
               <div
-                class="col-6 text-left"
+                class="col-6 text-center"
               >
                 <h2>
                   Average height and weight
@@ -136,7 +138,7 @@ Object {
                   >
                     Height: 
                     <b>
-                      0
+                      0.0
                        cm
                     </b>
                   </li>
@@ -145,7 +147,7 @@ Object {
                   >
                     Weight: 
                     <b>
-                      0
+                      0.0
                        Kg
                     </b>
                   </li>
@@ -154,7 +156,7 @@ Object {
             </div>
           </div>
           <div
-            class="card-columns animate__animated animate__fadeIn"
+            class="animate__animated animate__fadeIn"
           />
         </div>
       </div>
@@ -203,14 +205,16 @@ Object {
         class="container mt-2"
       >
         <h1
-          class="d-flex justify-content-center"
+          class="d-flex justify-content-center animate__animated animate__fadeIn"
           data-testid="heroScreen"
         >
           My hero team
         </h1>
-        <div>
+        <div
+          class="animate__animated animate__fadeIn"
+        >
           <h2
-            class="d-flex justify-content-center"
+            class="d-flex justify-content-center "
           >
             Type: 
             <b />
@@ -220,7 +224,7 @@ Object {
             class="row"
           >
             <div
-              class="col-6 text-left"
+              class="col-6 text-center"
             >
               <h2>
                 Average powerstats
@@ -233,7 +237,7 @@ Object {
                 >
                   Combat: 
                   <b>
-                    0
+                    0.0
                   </b>
                 </li>
                 <li
@@ -241,7 +245,7 @@ Object {
                 >
                   Durability: 
                   <b>
-                    0
+                    0.0
                   </b>
                 </li>
                 <li
@@ -249,7 +253,7 @@ Object {
                 >
                   Intelligence: 
                   <b>
-                    0
+                    0.0
                   </b>
                 </li>
                 <li
@@ -257,7 +261,7 @@ Object {
                 >
                   Power: 
                   <b>
-                    0
+                    0.0
                   </b>
                 </li>
                 <li
@@ -265,7 +269,7 @@ Object {
                 >
                   Speed: 
                   <b>
-                    0
+                    0.0
                   </b>
                 </li>
                 <li
@@ -273,13 +277,13 @@ Object {
                 >
                   Strength: 
                   <b>
-                    0
+                    0.0
                   </b>
                 </li>
               </ul>
             </div>
             <div
-              class="col-6 text-left"
+              class="col-6 text-center"
             >
               <h2>
                 Average height and weight
@@ -292,7 +296,7 @@ Object {
                 >
                   Height: 
                   <b>
-                    0
+                    0.0
                      cm
                   </b>
                 </li>
@@ -301,7 +305,7 @@ Object {
                 >
                   Weight: 
                   <b>
-                    0
+                    0.0
                      Kg
                   </b>
                 </li>
@@ -310,7 +314,7 @@ Object {
           </div>
         </div>
         <div
-          class="card-columns animate__animated animate__fadeIn"
+          class="animate__animated animate__fadeIn"
         />
       </div>
     </div>

@@ -7,7 +7,7 @@ export const HeroList = () => {
   const { heroTeam } = useSelector((state) => state.heroes);
 
   return (
-    <div className="card-columns animate__animated animate__fadeIn">
+    <div className="animate__animated animate__fadeIn">
       {heroTeam.map((props) => (
         <HeroCard
           key={props.id}

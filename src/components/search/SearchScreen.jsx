@@ -18,10 +18,14 @@ export const SearchScreen = ({ history }) => {
     const get = async () => {
       const heroName = q;
       if (mounted) {
-        const response = await searchHero(heroName);
-        setLoading(false);
-        if (response) {
-          setHeroSearch(response);
+        try {
+          const { results } = await searchHero(heroName);
+          setLoading(false);
+          if (results) {
+            setHeroSearch(results);
+          }
+        } catch (error) {
+          console.log(error);
         }
       }
     };
@@ -41,10 +45,10 @@ export const SearchScreen = ({ history }) => {
     history.push(`?q=${search.search}`);
   };
 
-  if (loading) return <h1>Loading</h1>;
+  if (loading) return <h1 data-testid="loading">Loading</h1>;
 
   return (
-    <>
+    <div>
       <Formik
         //TODO: In production, this initial form must be a empty string
         initialValues={{ search: '' }}
@@ -54,11 +58,11 @@ export const SearchScreen = ({ history }) => {
         onSubmit={handleSubmit}
       >
         {(formik) => (
-          <div>
-            <h1>Search Heroes</h1>
+          <div className="animate__animated animate__fadeIn animate__faster">
+            <h1 data-testid="resolved">Search Heroes</h1>
             <hr />
-            <div className="row animate__animated animate__fadeIn animate__faster ">
-              <div className="col-3">
+            <div className="row ">
+              <div className="col-md-3">
                 <h4>Search Form</h4>
                 <hr />
                 <form onSubmit={formik.handleSubmit}>
@@ -84,7 +88,7 @@ export const SearchScreen = ({ history }) => {
                   </button>
                 </form>
               </div>
-              <div className="col-9">
+              <div className="col-md-9">
                 <h4>Results</h4>
                 <hr />
                 {q === '' && (
@@ -109,6 +113,6 @@ export const SearchScreen = ({ history }) => {
           </div>
         )}
       </Formik>
-    </>
+    </div>
   );
 };
