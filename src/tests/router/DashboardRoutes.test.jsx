@@ -38,7 +38,5 @@ describe('Tests on DashboardRoutes', () => {
 
     const logout = wrapper.queryByText('Logout');
     expect(logout).toBeInTheDocument();
-
-    expect(wrapper).toMatchSnapshot();
   });
 });

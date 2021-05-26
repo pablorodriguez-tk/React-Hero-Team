@@ -74,6 +74,5 @@ describe('Test on <AppRouter/>', () => {
     await waitFor(() => {
       expect(heroPageTitle).toBeInTheDocument();
     });
-    expect(wrapper).toMatchSnapshot();
   });
 });
