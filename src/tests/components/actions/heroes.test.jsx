@@ -16,7 +16,6 @@ describe('Test on Auth actions', () => {
 
     const HeroAddAction = HeroAdd(props);
     const HeroLogoutAction = HeroLogout();
-
     const heroDeleteAction = heroDelete(1);
 
     expect(HeroAddAction).toEqual({

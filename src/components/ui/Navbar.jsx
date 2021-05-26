@@ -2,13 +2,11 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { startLogout } from '../../actions/auth';
-import { HeroLogout } from '../../actions/heroes';
 
 export const Navbar = () => {
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
-    await dispatch(HeroLogout());
     dispatch(startLogout());
   };
 

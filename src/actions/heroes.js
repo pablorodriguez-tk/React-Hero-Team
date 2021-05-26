@@ -1,4 +1,3 @@
-import { getHeroById } from '../helpers/fetch';
 import { types } from '../types/types';
 
 export const HeroAdd = ({
@@ -27,17 +26,6 @@ export const HeroAdd = ({
 export const HeroLogout = () => ({
   type: types.HeroLogout,
 });
-
-export const startGetHeroesById = (id) => {
-  return async (dispatch) => {
-    try {
-      const data = await getHeroById(id);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
 
 export const heroDelete = (id) => ({
   type: types.HeroDelete,

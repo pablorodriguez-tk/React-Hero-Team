@@ -1,35 +1,35 @@
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
+import '@testing-library/jest-dom/extend-expect';
+import PublicRoute from '../../router/PublicRoute';
 
-import PrivateRoute from '../../router/PrivateRoute';
-
-describe('Tests on <PrivateRoute/>', () => {
+describe('Tests on <PublicRoute/>', () => {
   const props = {
-    location: { pathname: '' },
+    location: { pathname: '/' },
   };
   test('Should to show component if is authenticated', () => {
     const wrapper = render(
       <MemoryRouter>
-        <PrivateRoute
+        <PublicRoute
           isAuthenticated={true}
-          component={() => <span>Testing</span>}
+          component={() => <span>Login</span>}
           {...props}
         />
       </MemoryRouter>
     );
-    expect(wrapper.getByText('Testing')).toBeTruthy();
+    expect(wrapper.queryByText('Login')).toBeNull();
   });
 
   test('Should to block component if is not authenticated', () => {
     const wrapper = render(
       <MemoryRouter>
-        <PrivateRoute
+        <PublicRoute
           isAuthenticated={false}
-          component={() => <span>Testing</span>}
+          component={() => <span>Login</span>}
           {...props}
         />
       </MemoryRouter>
     );
-    expect(wrapper.queryByText('Testing')).toBeNull();
+    expect(wrapper.getByText('Login')).toBeTruthy();
   });
 });

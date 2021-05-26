@@ -1,5 +1,6 @@
 import { loginWithEmailAndPassword } from '../helpers/fetch';
 import { types } from '../types/types';
+import { HeroLogout } from './heroes';
 
 export const startLogin = ({ email, password }) => {
   return async (dispatch) => {
@@ -23,6 +24,7 @@ export const startLogout = () => {
   return (dispatch) => {
     localStorage.clear();
     dispatch(logout());
+    dispatch(HeroLogout());
   };
 };
 

@@ -57,12 +57,19 @@ describe('Test on <Navbar/>', () => {
       </Provider>
     );
 
+    // To see problem
     const expectedActions = [
+      {
+        type: types.authLogout,
+      },
       {
         type: types.HeroLogout,
       },
       {
         type: types.authLogout,
+      },
+      {
+        type: types.HeroLogout,
       },
     ];
 
