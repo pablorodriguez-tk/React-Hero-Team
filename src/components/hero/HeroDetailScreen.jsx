@@ -10,7 +10,6 @@ export const HeroDetailScreen = () => {
 
   const idFromUrl = pathname.split('/')[2];
   const history = useHistory();
-
   const handleGoBack = () => {
     history.goBack('/');
   };
@@ -21,7 +20,6 @@ export const HeroDetailScreen = () => {
 
       if (data.response === 'error') {
         history.push('/');
-        setLoading(false);
       }
       if (mounted) {
         setHero(data);
@@ -36,7 +34,7 @@ export const HeroDetailScreen = () => {
     };
   }, [idFromUrl, history, mounted]);
 
-  if (loading) return <h1>Loading</h1>;
+  if (loading) return <h1 data-testid="HeroDetailScreen-loading">Loading</h1>;
 
   const fullName = hero.biography['full-name'];
   const image = hero.image.url;
@@ -47,7 +45,10 @@ export const HeroDetailScreen = () => {
   const eyeColor = hero.appearance['eye-color'];
 
   return (
-    <div className="d-flex justify-content-center">
+    <div
+      className="d-flex justify-content-center"
+      data-testid="HeroDetailScreen"
+    >
       <div className="card mb-3" style={{ maxWidth: '70%' }}>
         <div className="row g-0">
           <div className="col-md-5">

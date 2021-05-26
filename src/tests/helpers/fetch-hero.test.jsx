@@ -2,8 +2,8 @@
  * @jest-environment node
  */
 
-import { getHeroById, searchHero } from '../../../helpers/fetch';
 import '@testing-library/jest-dom/extend-expect';
+import { getHeroById, searchHero } from '../../helpers/fetch';
 
 describe('Test on Fetch Helper', () => {
   test('searchHero function should work', async () => {

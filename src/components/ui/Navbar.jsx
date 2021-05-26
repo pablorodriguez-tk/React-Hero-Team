@@ -7,9 +7,9 @@ import { HeroLogout } from '../../actions/heroes';
 export const Navbar = () => {
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await dispatch(HeroLogout());
     dispatch(startLogout());
-    dispatch(HeroLogout());
   };
 
   return (
@@ -33,7 +33,11 @@ export const Navbar = () => {
         </div>
 
         <ul className="navbar-nav ml-auto">
-          <button className="nav-item nav-link btn" onClick={handleLogout}>
+          <button
+            className="nav-item nav-link btn"
+            onClick={handleLogout}
+            data-testid="logoutButton"
+          >
             Logout
           </button>
         </ul>

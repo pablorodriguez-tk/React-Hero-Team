@@ -65,7 +65,7 @@ export const SearchScreen = ({ history }) => {
               <div className="col-md-3">
                 <h4>Search Form</h4>
                 <hr />
-                <form onSubmit={formik.handleSubmit}>
+                <form onSubmit={formik.handleSubmit} data-testid="searchForm">
                   <div className="input-group mb-1">
                     <input
                       placeholder="Hero name"
@@ -73,6 +73,7 @@ export const SearchScreen = ({ history }) => {
                       id="search"
                       type="text"
                       autoComplete="off"
+                      data-testid="input-search"
                       {...formik.getFieldProps('search')}
                     />
                   </div>
@@ -102,6 +103,7 @@ export const SearchScreen = ({ history }) => {
                 <div className="container">
                   {HeroSearch.map((hero) => (
                     <HeroCard
+                      data-testid="heroCard"
                       cta={'Click to add to team'}
                       key={hero.id}
                       {...hero}

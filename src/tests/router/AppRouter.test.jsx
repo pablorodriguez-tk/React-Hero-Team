@@ -4,16 +4,14 @@ import { render, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import AppRouter from '../../../router/AppRouter';
 import { MemoryRouter } from 'react-router';
+import AppRouter from '../../router/AppRouter';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-beforeEach(() => {});
-
 describe('Test on <AppRouter/>', () => {
-  test('Should to show login screen if user is not authenticated', async () => {
+  test('Should always to show login screen if user is not authenticated', async () => {
     const initState = {
       auth: {
         isLoggedIn: false,

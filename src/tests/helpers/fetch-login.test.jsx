@@ -1,8 +1,8 @@
-import { loginWithEmailAndPassword } from '../../../helpers/fetch';
 import '@testing-library/jest-dom/extend-expect';
-import { Alert } from '../../../components/Alert/Alert';
+import { Alert } from '../../components/Alert/Alert';
+import { loginWithEmailAndPassword } from '../../helpers/fetch';
 
-jest.mock('../../../components/Alert/Alert', () => ({
+jest.mock('../../components/Alert/Alert', () => ({
   Alert: jest.fn(),
 }));
 

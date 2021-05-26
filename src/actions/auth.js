@@ -12,7 +12,7 @@ export const startLogin = ({ email, password }) => {
   };
 };
 
-const login = (email) => ({
+export const login = (email) => ({
   type: types.authLogin,
   payload: {
     email,
@@ -26,6 +26,6 @@ export const startLogout = () => {
   };
 };
 
-const logout = () => ({
+export const logout = () => ({
   type: types.authLogout,
 });
