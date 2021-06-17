@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { getHeroById } from '../helpers/fetch';
 
-export const useHeroDetail = () => {
+export const useHeroDetail = (props) => {
   const { pathname } = useLocation();
   const [hero, setHero] = useState();
   const [mounted, setMounted] = useState(true);
@@ -28,22 +28,26 @@ export const useHeroDetail = () => {
       setLoading(false);
     };
 
-    get();
+    if (!props) {
+      get();
+    } else {
+      setLoading(false);
+    }
 
     return () => {
       setMounted(false);
     };
-  }, [idFromUrl, history, mounted]);
+  }, [idFromUrl, history, mounted, props]);
 
   if (loading) return <h1 data-testid="HeroDetailScreen-loading">Loading</h1>;
 
-  const fullName = hero.biography['full-name'];
-  const image = hero.image.url;
-  const weight = hero.appearance.weight[1];
-  const height = hero.appearance.height[1];
-  const aliases = hero.biography.aliases.join(' - ');
-  const work = hero.work.occupation;
-  const eyeColor = hero.appearance['eye-color'];
+  const fullName = hero?.biography['full-name'];
+  const image = hero?.image.url;
+  const weight = hero?.appearance.weight[1];
+  const height = hero?.appearance.height[1];
+  const aliases = hero?.biography.aliases.join(' - ');
+  const work = hero?.work.occupation;
+  const eyeColor = hero?.appearance['eye-color'];
 
   return {
     image,

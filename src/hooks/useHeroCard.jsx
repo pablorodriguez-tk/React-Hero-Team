@@ -135,8 +135,8 @@ export const useHeroCard = (props) => {
 
   const preHandleAddHero = () => handleAddHero(props);
 
-  const handleSeeMore = (id) => {
-    history.push(`/hero/${id}`);
+  const handleSeeMore = (props) => {
+    history.push({ pathname: `/hero/${props.id}`, state: props });
   };
 
   const handleDelete = (id) => {

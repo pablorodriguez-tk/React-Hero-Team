@@ -28,11 +28,14 @@ export const HeroCard = ({
   const { handleSeeMore, handleDelete, preHandleAddHero } =
     useHeroCard(sendToHeroAdd);
 
+  //Hero Screen
   if (hasPowerstats) {
     return (
       <div
         className="my-card animate__animated animate__fadeIn"
-        onClick={() => handleSeeMore(id, biography, appearance, work, image)}
+        onClick={() =>
+          handleSeeMore({ id, biography, appearance, work, image })
+        }
       >
         <img src={image.url} alt={name} />
         <div className="profile-name">{name}</div>
@@ -64,6 +67,7 @@ export const HeroCard = ({
     );
   }
 
+  //Hero Search Screen
   return (
     <div className="my-card" onClick={preHandleAddHero}>
       <img src={image.url} alt={name} />
