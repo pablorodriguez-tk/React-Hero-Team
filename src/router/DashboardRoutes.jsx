@@ -1,9 +1,9 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
-import { SearchScreen } from '../components/search/SearchScreen';
 import { Navbar } from '../components/ui/Navbar';
 import { HeroDetailScreen } from '../pages/hero/HeroDetailScreen';
 import { HeroScreen } from '../pages/hero/HeroScreen';
+import { SearchScreen } from '../pages/hero/SearchScreen';
 
 const DashboardRoutes = () => {
   return (

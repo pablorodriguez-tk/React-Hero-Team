@@ -1,49 +1,11 @@
 import { Formik } from 'formik';
-import React, { useEffect, useState } from 'react';
-import queryString from 'query-string';
-import { HeroCard } from '../hero/HeroCard';
+import React from 'react';
 import * as Yup from 'yup';
-import { useLocation } from 'react-router';
-import { searchHero } from '../../helpers/fetch';
+import { HeroCard } from '../../components/hero/HeroCard';
+import { useSearchHeroes } from '../../hooks/useSearchHeroes';
 
 export const SearchScreen = ({ history }) => {
-  const [loading, setLoading] = useState(true);
-  const [HeroSearch, setHeroSearch] = useState([]);
-  const location = useLocation();
-  const { q = '' } = queryString.parse(location.search);
-
-  useEffect(() => {
-    let mounted = true;
-
-    const get = async () => {
-      const heroName = q;
-      if (mounted) {
-        try {
-          const { results } = await searchHero(heroName);
-          setLoading(false);
-          if (results) {
-            setHeroSearch(results);
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    };
-    if (q) {
-      get();
-    } else {
-      setLoading(false);
-    }
-
-    return () => {
-      mounted = false;
-    };
-  }, [q]);
-
-  const handleSubmit = (search, { setSubmitting }) => {
-    setSubmitting(false);
-    history.push(`?q=${search.search}`);
-  };
+  const { loading, handleSubmit, q, HeroSearch } = useSearchHeroes(history);
 
   if (loading) return <h1 data-testid="loading">Loading</h1>;
 
