@@ -1,48 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router';
-import { getHeroById } from '../../helpers/fetch';
+import React from 'react';
+import { useHeroDetail } from '../../hook/useHeroDetail';
 
 export const HeroDetailScreen = () => {
-  const { pathname } = useLocation();
-  const [hero, setHero] = useState();
-  const [mounted, setMounted] = useState(true);
-  const [loading, setLoading] = useState(true);
+  const {
+    image,
+    fullName,
+    aliases,
+    weight,
+    height,
+    work,
+    eyeColor,
+    handleGoBack,
+    loading,
+  } = useHeroDetail();
 
-  const idFromUrl = pathname.split('/')[2];
-  const history = useHistory();
-  const handleGoBack = () => {
-    history.goBack('/');
-  };
-
-  useEffect(() => {
-    const get = async () => {
-      const data = await getHeroById(idFromUrl);
-
-      if (data.response === 'error') {
-        history.push('/');
-      }
-      if (mounted) {
-        setHero(data);
-      }
-      setLoading(false);
-    };
-
-    get();
-
-    return () => {
-      setMounted(false);
-    };
-  }, [idFromUrl, history, mounted]);
-
-  if (loading) return <h1 data-testid="HeroDetailScreen-loading">Loading</h1>;
-
-  const fullName = hero.biography['full-name'];
-  const image = hero.image.url;
-  const weight = hero.appearance.weight[1];
-  const height = hero.appearance.height[1];
-  const aliases = hero.biography.aliases.join(' - ');
-  const work = hero.work.occupation;
-  const eyeColor = hero.appearance['eye-color'];
+  if (loading !== false)
+    return <h1 data-testid="HeroDetailScreen-loading">Loading</h1>;
 
   return (
     <div
