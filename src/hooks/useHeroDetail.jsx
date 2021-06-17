@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { getHeroById } from '../helpers/fetch';
 
@@ -38,8 +38,6 @@ export const useHeroDetail = (props) => {
       setMounted(false);
     };
   }, [idFromUrl, history, mounted, props]);
-
-  if (loading) return <h1 data-testid="HeroDetailScreen-loading">Loading</h1>;
 
   const fullName = hero?.biography['full-name'];
   const image = hero?.image.url;

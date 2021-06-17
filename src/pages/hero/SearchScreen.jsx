@@ -2,12 +2,13 @@ import { Formik } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
 import { HeroCard } from '../../components/hero/HeroCard';
+import { Spinner } from '../../components/spinner/Spinner';
 import { useSearchHeroes } from '../../hooks/useSearchHeroes';
 
 export const SearchScreen = ({ history }) => {
   const { loading, handleSubmit, q, HeroSearch } = useSearchHeroes(history);
 
-  if (loading) return <h1 data-testid="loading">Loading</h1>;
+  if (loading) return <Spinner />;
 
   return (
     <div>

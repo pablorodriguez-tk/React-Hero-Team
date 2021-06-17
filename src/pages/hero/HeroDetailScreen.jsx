@@ -1,4 +1,5 @@
 import React from 'react';
+import { Spinner } from '../../components/spinner/Spinner';
 import { useHeroDetail } from '../../hooks/useHeroDetail';
 
 export const HeroDetailScreen = (props) => {
@@ -17,12 +18,11 @@ export const HeroDetailScreen = (props) => {
     loading,
   } = useHeroDetail(HeroProp);
 
-  if (loading !== false)
-    return <h1 data-testid="HeroDetailScreen-loading">Loading</h1>;
+  if (loading !== false) return <Spinner />;
 
   return (
     <div
-      className="d-flex justify-content-center"
+      className="d-flex justify-content-center animate__animated animate__fadeIn"
       data-testid="HeroDetailScreen"
     >
       <div className="card mb-3" style={{ maxWidth: '70%' }}>
