@@ -15,8 +15,6 @@ export const useHeroDetail = () => {
     history.goBack('/');
   };
 
-  console.log(history);
-
   useEffect(() => {
     const get = async () => {
       const data = await getHeroById(idFromUrl);
