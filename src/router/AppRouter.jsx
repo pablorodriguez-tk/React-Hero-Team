@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
-import { LoginScreen } from '../components/auth/LoginScreen';
+import { LoginScreen } from '../pages/auth/LoginScreen';
+import { startLogout } from '../state/action-creators/auth';
 import DashboardRoutes from './DashboardRoutes';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
-import { startLogout } from '../actions/auth';
 
 const AppRouter = () => {
   const dispatch = useDispatch();

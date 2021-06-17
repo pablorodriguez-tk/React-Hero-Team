@@ -1,11 +1,14 @@
-import { types } from '../../../types/types';
-import { login, logout, startLogout } from '../../../actions/auth';
-
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from 'axios';
-axios.defaults.adapter = require('axios/lib/adapters/http');
+import {
+  login,
+  logout,
+  startLogout,
+} from '../../../state/action-creators/auth';
+import { types } from '../../../state/action-types/types';
 
+axios.defaults.adapter = require('axios/lib/adapters/http');
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 

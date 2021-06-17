@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHeroStats } from '../../hook/useHeroStats';
+import { useHeroStats } from '../../hooks/useHeroStats';
 
 export const HeroStats = () => {
   const {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { startLogin } from '../../actions/auth';
+import { startLogin } from '../../state/action-creators/auth';
 import './login.css';
 import { Formik } from 'formik';
 import * as Yup from 'yup';

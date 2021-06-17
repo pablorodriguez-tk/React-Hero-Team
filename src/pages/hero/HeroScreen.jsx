@@ -1,6 +1,6 @@
 import React from 'react';
-import { HeroList } from './HeroList';
-import { HeroStats } from './HeroStats';
+import { HeroList } from '../../components/hero/HeroList';
+import { HeroStats } from '../../components/hero/HeroStats';
 
 export const HeroScreen = () => {
   return (

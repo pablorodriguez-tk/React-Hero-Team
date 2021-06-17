@@ -1,5 +1,9 @@
-import { types } from '../../../types/types';
-import { HeroAdd, heroDelete, HeroLogout } from '../../../actions/heroes';
+import {
+  HeroAdd,
+  heroDelete,
+  HeroLogout,
+} from '../../../state/action-creators/heroes';
+import { types } from '../../../state/action-types/types';
 
 describe('Test on Auth actions', () => {
   test('Should work all actions', () => {

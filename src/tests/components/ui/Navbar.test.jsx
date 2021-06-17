@@ -6,8 +6,8 @@ import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import { MemoryRouter } from 'react-router';
 import { Navbar } from '../../../components/ui/Navbar';
-import { startLogout } from '../../../actions/auth';
-import { types } from '../../../types/types';
+import { startLogout } from '../../../state/action-creators/auth';
+import { types } from '../../../state/action-types/types';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

@@ -1,5 +1,5 @@
-import { loginWithEmailAndPassword } from '../helpers/fetch';
-import { types } from '../types/types';
+import { loginWithEmailAndPassword } from '../../helpers/fetch';
+import { types } from '../action-types/types';
 import { HeroLogout } from './heroes';
 
 export const startLogin = ({ email, password }) => {

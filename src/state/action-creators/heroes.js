@@ -1,4 +1,4 @@
-import { types } from '../types/types';
+import { types } from '../action-types/types';
 
 export const HeroAdd = ({
   id,

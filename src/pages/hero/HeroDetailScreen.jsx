@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHeroDetail } from '../../hook/useHeroDetail';
+import { useHeroDetail } from '../../hooks/useHeroDetail';
 
 export const HeroDetailScreen = () => {
   const {

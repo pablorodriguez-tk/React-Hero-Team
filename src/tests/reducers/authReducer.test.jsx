@@ -1,5 +1,5 @@
-import { authReducer } from '../../reducers/authReducer';
-import { types } from '../../types/types';
+import { types } from '../../state/action-types/types';
+import { authReducer } from '../../state/reducers/authReducer';
 
 describe('Test on authReducer', () => {
   test('Should return initial state', () => {
