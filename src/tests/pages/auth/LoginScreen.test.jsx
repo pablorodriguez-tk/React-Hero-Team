@@ -1,10 +1,10 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { fireEvent, render, cleanup, waitFor } from '@testing-library/react';
-import { LoginScreen } from '../../../pages/auth/LoginScreen';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
+import { LoginScreen } from '../../../pages/auth/LoginScreen';
 import { startLogin } from '../../../state/action-creators/auth';
 
 jest.mock('../../../state/action-creators/auth', () => ({

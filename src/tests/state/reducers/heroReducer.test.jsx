@@ -1,5 +1,5 @@
-import { types } from '../../state/action-types/types';
-import { heroReducer } from '../../state/reducers/heroReducer';
+import { types } from '../../../state/action-types/types';
+import { heroReducer } from '../../../state/reducers/heroReducer';
 
 const initialStateDemo = {
   heroTeam: [
